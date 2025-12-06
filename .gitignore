@@ -25,7 +25,7 @@ DerivedData/
 *.ipa
 *.xcuserstate
 
-# Large Data (Do not upload raw datasets to GitHub)
+# Large Data
 /Model_Training/garbage_data/
 /Model_Training/garbage_classification/
 *.pth
