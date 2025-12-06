@@ -31,20 +31,3 @@ EcoLens is an iOS application utilizing machine learning to facilitate sustainab
 
 ## Repository Structure
 This repository follows a monorepo structure containing both the iOS source code and the machine learning development environment.
-
-```text
-EcoLens/
-├── iOS_App/                # iOS Application Source
-│   ├── EcoLens.xcodeproj   # Main Xcode project configuration
-│   ├── EcoLens/            # Application source code
-│   │   ├── Views/          # SwiftUI View hierarchy
-│   │   ├── Models/         # Data models and Logic
-│   │   └── ViewModels/     # ObservableObjects for state management
-│   └── EcoLensTests/       # Unit and UI Test targets
-│
-├── Model_Training/         # ML Research & Development
-│   ├── training_script.ipynb   # Jupyter Notebook for model training
-│   ├── requirements.txt        # Python dependencies
-│   └── class_labels.json       # Taxonomy mapping for classification
-│
-└── README.md
