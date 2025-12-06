@@ -10,10 +10,9 @@ import CoreML
 import Vision
 import PhotosUI
 
-// 1. UPDATE: Removed .highlighting case
 enum AppState {
-    case idle           // Showing results or start screen
-    case takingPhoto    // The native camera is open (includes native cropping)
+    case idle
+    case takingPhoto
 }
 
 struct ContentView: View {
@@ -33,34 +32,24 @@ struct ContentView: View {
         ZStack {
             switch appState {
             case .idle:
-                // SCREEN 1: Main Results Screen
                 mainMenuScreen
                 
             case .takingPhoto:
-                // SCREEN 2: Native Camera
-                // The ImagePicker now handles cropping via .allowsEditing = true
                 ImagePicker(image: $tempImage) { didTakePhoto in
                     if didTakePhoto, let img = tempImage {
-                        // 2. UPDATE: Success Logic
-                        // The image 'img' is already cropped by the iOS native editor.
                         
-                        // A. Set as current image so user sees it
                         self.currentImage = img
                         
-                        // B. Run classification immediately
                         self.classifyImage(image: img)
                         
-                        // C. Return to main menu to show results
                         self.appState = .idle
                         
                     } else {
-                        // User cancelled
                         self.appState = .idle
                     }
                 }
                 .ignoresSafeArea()
                 
-            // 3. UPDATE: Removed the 'case .highlighting' block entirely
             }
         }
     }

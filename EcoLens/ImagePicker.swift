@@ -22,7 +22,6 @@ struct ImagePicker: UIViewControllerRepresentable {
         #endif
         
         // 1. ENABLE NATIVE CROPPING
-        // This brings up the standard "Move and Scale" square box after taking a photo
         picker.allowsEditing = true
         
         picker.delegate = context.coordinator
@@ -44,7 +43,6 @@ struct ImagePicker: UIViewControllerRepresentable {
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             // 2. RETRIEVE THE CROPPED IMAGE
-            // We use .editedImage instead of .originalImage
             if let uiImage = info[.editedImage] as? UIImage {
                 parent.image = uiImage
                 parent.onFinish(true)

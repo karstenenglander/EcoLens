@@ -19,13 +19,11 @@ func cropImage(_ original: UIImage, toRect highlightRect: CGRect, inView viewSiz
     var offsetY: CGFloat = 0.0
     
     if imageRatio > viewRatio {
-        // Image is wider than view (Bars on top/bottom)
         scale = viewSize.width / original.size.width
         let displayedHeight = original.size.height * scale
         offsetX = 0
         offsetY = (viewSize.height - displayedHeight) / 2.0
     } else {
-        // Image is taller than view (Bars on left/right)
         scale = viewSize.height / original.size.height
         let displayedWidth = original.size.width * scale
         offsetX = (viewSize.width - displayedWidth) / 2.0
@@ -33,19 +31,16 @@ func cropImage(_ original: UIImage, toRect highlightRect: CGRect, inView viewSiz
     }
     
     // 2. Adjust the drawn Highlight Rect to remove the "Black Bars" (Offsets)
-    // We are converting from View Coordinates -> Image Displayed Coordinates
     let adjustedX = highlightRect.origin.x - offsetX
     let adjustedY = highlightRect.origin.y - offsetY
     
     // 3. Scale up to original Image Pixel Coordinates
-    // We divide by scale (which is < 1) to get back to full resolution
     let cropX = adjustedX / scale
     let cropY = adjustedY / scale
     let cropW = highlightRect.width / scale
     let cropH = highlightRect.height / scale
     
     // 4. Create the pixel-based rect
-    // We clamp values to ensure we don't crash by cropping outside the image
     let finalRect = CGRect(
         x: max(0, cropX),
         y: max(0, cropY),
